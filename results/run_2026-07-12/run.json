@@ -102,7 +102,7 @@
     "summary": {
       "n": 5,
       "mean_s": 2.521,
-      "stdev_s": 0.204,
+      "sample_stdev_s": 0.204,
       "min_s": 2.2,
       "max_s": 2.702
     }

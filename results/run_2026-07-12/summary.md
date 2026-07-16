@@ -4,6 +4,10 @@ Source: `notebooks/client_colab.ipynb`
 Raw rows: `latency_raw.csv`  
 Machine-readable: `run.json`
 
+This run is a first successful T4 smoke test: it validates the harness, result
+schema, and basic latency measurement. It is not intended for strong performance
+claims.
+
 ## Environment
 
 | Item | Value |
@@ -55,16 +59,18 @@ This run did not record stream `usage` / `completion_tokens`. Streaming and non-
 |---|---|
 | n | 5 |
 | mean_s | 2.521 |
-| stdev_s | 0.204 |
+| sample_stdev_s | 0.204 |
 | min_s | 2.200 |
 | max_s | 2.702 |
 | CV | ~8.1% |
+
+Standard deviation is the sample standard deviation (`statistics.stdev`, `ddof=1`) across the five measured runs.
 
 **Token columns:** This Colab run’s sweep cell only logged latency. Per-run `response.usage` was not captured, so token columns are blank on purpose — do not copy `completion_tokens=100` from the single-request row or assume `max_tokens`. The notebook now records usage on every sweep row for future runs.
 
 ## Initial observations
 
-- The first non-streaming request took 4.887 seconds, substantially longer than later requests, suggesting cold-start or first-run overhead.
+- The first standalone non-streaming request took 4.887 seconds, substantially longer than the later sweep requests. This may reflect first-run, runtime-state, or other transient overhead, but the cause was not isolated in this experiment.
 - After one explicit warmup request, five measured requests had a mean end-to-end latency of 2.521 seconds with a standard deviation of 0.204 seconds.
 - Measured latencies trended upward across early runs (`2.200 → 2.460 → 2.565 → 2.702 → 2.679`); cause is not established.
 - The streaming request produced the first token after 79 ms and completed after 2.082 seconds.

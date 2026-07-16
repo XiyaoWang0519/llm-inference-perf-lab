@@ -48,13 +48,16 @@ Configuration:
 Results:
 
 - Mean end-to-end latency: 2.521 s
-- Standard deviation: 0.204 s
+- Sample standard deviation: 0.204 s
 - Minimum latency: 2.200 s
 - Maximum latency: 2.702 s
 - Streaming TTFT: 0.079 s
 
-The initial non-streaming request was slower at 4.887 seconds, likely because
-it included first-run initialization and warmup overhead.
+Standard deviation is the sample standard deviation across the five measured runs.
+
+The first standalone non-streaming request took 4.887 seconds, substantially
+longer than the later sweep requests. This may reflect first-run, runtime-state,
+or other transient overhead, but the cause was not isolated in this experiment.
 
 Artifacts: [`results/run_2026-07-12/`](results/run_2026-07-12/) (`latency_raw.csv`, `summary.md`).
 
