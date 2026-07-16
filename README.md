@@ -32,6 +32,32 @@ python src/client.py
 
 Point `BASE_URL` / `MODEL_NAME` in `src/client.py` at your OpenAI-compatible server.
 
+## First T4 benchmark
+
+The first experiment was run on a Google Colab Tesla T4 using vLLM 0.11.2
+and Qwen2.5-1.5B-Instruct.
+
+Configuration:
+
+- Prompt tokens: 36
+- Maximum output tokens: 100
+- Temperature: 0.0
+- Warmup requests: 1
+- Measured requests: 5
+
+Results:
+
+- Mean end-to-end latency: 2.521 s
+- Standard deviation: 0.204 s
+- Minimum latency: 2.200 s
+- Maximum latency: 2.702 s
+- Streaming TTFT: 0.079 s
+
+The initial non-streaming request was slower at 4.887 seconds, likely because
+it included first-run initialization and warmup overhead.
+
+Artifacts: [`results/run_2026-07-12/`](results/run_2026-07-12/) (`latency_raw.csv`, `summary.md`).
+
 ## Metrics notes
 
 - `output_tokens_per_s` / `output_tokens_per_e2e_s` means `completion_tokens / end_to_end_latency`.

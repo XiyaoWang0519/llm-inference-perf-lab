@@ -1,0 +1,110 @@
+{
+  "source_notebook": "notebooks/client_colab.ipynb",
+  "run_date": "2026-07-12",
+  "environment": {
+    "gpu": "Tesla T4",
+    "gpu_memory_mib": 15360,
+    "cuda_driver": "580.82.07",
+    "cuda_version": "13.0",
+    "pytorch": "2.9.0+cu128",
+    "pytorch_cuda_build": "12.8",
+    "vllm": "0.11.2"
+  },
+  "server": {
+    "model_id": "Qwen/Qwen2.5-1.5B-Instruct",
+    "served_model_name": "qwen2.5-1.5b",
+    "base_url": "http://127.0.0.1:8000/v1",
+    "dtype": "half",
+    "max_model_len": 2048,
+    "gpu_memory_utilization": 0.85,
+    "port": 8000
+  },
+  "client": {
+    "prompt": "What is LLM inference latency?",
+    "max_tokens": 100,
+    "temperature": 0.0
+  },
+  "single_request": {
+    "latency_s": 4.887,
+    "prompt_tokens": 36,
+    "completion_tokens": 100,
+    "total_tokens": 136,
+    "output_tokens_per_s": 20.46,
+    "response": "LLM inference latency refers to the time it takes for an artificial intelligence language model (LLM) to generate a response or output after receiving input data. This can be influenced by various factors such as:\n\n1. Model complexity: More complex models may take longer to process and respond.\n\n2. Data size: Larger datasets require more processing power and time to analyze.\n\n3. Hardware limitations: The computational resources available on the server hosting the model will affect performance.\n\n4. Network conditions: Slow internet connections"
+  },
+  "streaming_request": {
+    "ttft_s": 0.079,
+    "e2e_latency_s": 2.082,
+    "output_chars": 548
+  },
+  "latency_sweep": {
+    "warmup_runs": 1,
+    "num_runs": 5,
+    "csv": "results/run_2026-07-12/latency_raw.csv",
+    "usage_recorded": false,
+    "usage_note": "Original sweep cell only printed latency; per-run response.usage was not captured. Token columns in the CSV are intentionally blank — do not infer from max_tokens or the single_request row. Re-run section 10 with the updated notebook to fill them.",
+    "rows": [
+      {
+        "run": 1,
+        "is_warmup": true,
+        "latency_s": 2.066,
+        "prompt_tokens": null,
+        "completion_tokens": null,
+        "total_tokens": null,
+        "output_tokens_per_s": null
+      },
+      {
+        "run": 1,
+        "is_warmup": false,
+        "latency_s": 2.2,
+        "prompt_tokens": null,
+        "completion_tokens": null,
+        "total_tokens": null,
+        "output_tokens_per_s": null
+      },
+      {
+        "run": 2,
+        "is_warmup": false,
+        "latency_s": 2.46,
+        "prompt_tokens": null,
+        "completion_tokens": null,
+        "total_tokens": null,
+        "output_tokens_per_s": null
+      },
+      {
+        "run": 3,
+        "is_warmup": false,
+        "latency_s": 2.565,
+        "prompt_tokens": null,
+        "completion_tokens": null,
+        "total_tokens": null,
+        "output_tokens_per_s": null
+      },
+      {
+        "run": 4,
+        "is_warmup": false,
+        "latency_s": 2.702,
+        "prompt_tokens": null,
+        "completion_tokens": null,
+        "total_tokens": null,
+        "output_tokens_per_s": null
+      },
+      {
+        "run": 5,
+        "is_warmup": false,
+        "latency_s": 2.679,
+        "prompt_tokens": null,
+        "completion_tokens": null,
+        "total_tokens": null,
+        "output_tokens_per_s": null
+      }
+    ],
+    "summary": {
+      "n": 5,
+      "mean_s": 2.521,
+      "stdev_s": 0.204,
+      "min_s": 2.2,
+      "max_s": 2.702
+    }
+  }
+}
