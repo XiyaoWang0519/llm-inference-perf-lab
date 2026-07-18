@@ -11,6 +11,9 @@ llm-inference-perf-lab/
 │   └── vllm_setup.ipynb     # Colab vLLM install / serve helper
 ├── src/
 │   └── client.py            # Minimal OpenAI-compatible client
+├── plots/
+│   ├── latency_vs_concurrency.png
+│   └── throughput_vs_concurrency.png
 ├── results/
 │   └── run_YYYY-MM-DD/      # Dated benchmark artifacts
 ├── requirements.txt
@@ -60,6 +63,30 @@ longer than the later sweep requests. This may reflect first-run, runtime-state,
 or other transient overhead, but the cause was not isolated in this experiment.
 
 Artifacts: [`results/run_2026-07-12/`](results/run_2026-07-12/) (`latency_raw.csv`, `summary.md`).
+
+## Concurrency sweep (T4)
+
+Same Colab T4 + Qwen2.5-1.5B-Instruct setup. Concurrent request levels
+`1, 2, 4, 8`, each repeated three times (36 prompt tokens, 100 max output
+tokens, temperature 0.0).
+
+| Concurrency | Mean latency (s) | Aggregate output tokens/s | Scaling efficiency |
+|---:|---:|---:|---:|
+| 1 | 1.649 | 60.63 | 100.0% |
+| 2 | 1.669 | 119.13 | 98.2% |
+| 4 | 1.711 | 232.21 | 95.8% |
+| 8 | 1.767 | 449.82 | 92.7% |
+
+Mean request latency rose ~7.1% from concurrency 1→8, while aggregate
+output throughput improved ~7.42×.
+
+![Latency vs concurrency](plots/latency_vs_concurrency.png)
+
+![Throughput vs concurrency](plots/throughput_vs_concurrency.png)
+
+Artifacts: [`results/concurrency_raw.csv`](results/concurrency_raw.csv),
+[`results/concurrency_summary.csv`](results/concurrency_summary.csv),
+[`plots/`](plots/).
 
 ## Metrics notes
 
